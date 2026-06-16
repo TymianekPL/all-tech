@@ -6,7 +6,7 @@ export const Api = {
           const json = await response.json();
 
           if (!response.ok)
-               throw new Error(json);
+               throw new Error(JSON.stringify(json));
 
           return json as T;
      },

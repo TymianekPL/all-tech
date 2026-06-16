@@ -1,0 +1,24 @@
+Distributed Task & Workflow System
+
+Frontend - dashboards, panels, UIs etc
+- TypeScript (React.JS)
+Gateway - the gateway for all the backend
+- TypeScript (Express.JS)
+Backends
+- Auth => Java (SpringBoot)
+- Audit Log => C# (ASP.NET)
+- Organisations & roles => TypeScript (Express.JS)
+- Project & dashboards => C# (ASP.NET)
+- Chat system => TypeScript (Express.JS)
+Protocols:
+- REST/JSON (frontend <-> gateway)
+- gRPC (gateway <-> backend; backend <-> backend)
+- WebSockets (frontend <-> gateway)
+- RabbitMQ (gateway <-> backend)
+- SignalR (C# backend <-> C# backend)
+Databases:
+- audit logs => MariaDB
+- users, credentials and authentication => MariaDB
+- organisations, projects, board => MariaDB
+- chats, messages & groups => MariaDB
+- rate limiting, caching => Redis
