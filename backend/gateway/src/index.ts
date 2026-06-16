@@ -14,6 +14,18 @@ app.get("/gateway/version", (_req, res) => {
      });
 });
 
+let counter = 0;
+app.get("/counter", (_req, res) => {
+     res.json({
+          counter,
+     });
+});
+app.get("/increment", (_req, res) => {
+     res.json({
+          counter: ++counter,
+     });
+});
+
 app.listen(PORT, () => {
      console.log(`App listening on http://localhost:${PORT}`);
 });
