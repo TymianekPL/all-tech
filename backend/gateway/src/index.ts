@@ -2,6 +2,8 @@ import { config } from "dotenv";
 import express from "express";
 import { GatewayVersion } from "./globals.ts";
 import { Auth } from "./apis/auth.ts";
+import AuthRoute from "./routes/auth.ts";
+import { Logger } from "./utils/logger.ts";
 
 config();
 const PORT = process.env.PORT || 3000;
@@ -16,8 +18,8 @@ app.get("/gateway/version", async (_req, res) => {
           }
      });
 });
+app.use(AuthRoute.path, AuthRoute.router);
 
 app.listen(PORT, () => {
-     console.log(`App listening on http://localhost:${PORT}`);
+     Logger.info("server", `App listening on http://localhost:${PORT}`);
 });
-

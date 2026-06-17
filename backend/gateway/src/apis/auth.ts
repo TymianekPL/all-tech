@@ -1,6 +1,20 @@
 import { AuthRestAddress } from "../globals";
+export type Auth = {
+     VersionResponse: {
+          Version: `${number}.${number}.${number}`;
+     };
+     BeginLoginResponse: {
+          username: string;
+
+     };
+};
 
 export const Auth = {
+     Routes: {
+          version: "/version",
+          beginLogin: "/begin-login",
+          signup: "/signup"
+     },
      async Get<T>(path: string) {
           const response = await fetch(`${AuthRestAddress}${path}`);
           const json = await response.json();
@@ -8,7 +22,7 @@ export const Auth = {
           return json as T;
      },
      Version: async () => {
-          const { Version } = await Auth.Get<{ Version: string; }>("/version");
+          const { Version } = await Auth.Get<Auth["VersionResponse"]>(Auth.Routes.version);
           return Version;
      }
 };
