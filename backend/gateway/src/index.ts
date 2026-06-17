@@ -10,6 +10,8 @@ const PORT = process.env.PORT || 3000;
 
 const app = express();
 
+app.use(express.json());
+
 app.get("/gateway/version", async (_req, res) => {
      res.json({
           version: GatewayVersion,
@@ -19,6 +21,14 @@ app.get("/gateway/version", async (_req, res) => {
      });
 });
 app.use(AuthRoute.path, AuthRoute.router);
+
+app.use((req, res) => {
+     res.status(404).json({
+          message: "Not found",
+          resource: req.url,
+          method: req.method
+     });
+});
 
 app.listen(PORT, () => {
      Logger.info("server", `App listening on http://localhost:${PORT}`);

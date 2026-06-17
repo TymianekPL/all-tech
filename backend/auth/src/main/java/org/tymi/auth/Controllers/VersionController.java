@@ -1,7 +1,8 @@
-package org.tymi.auth;
+package org.tymi.auth.Controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.tymi.auth.HttpModels.VersionResponse;
 
 @RestController
 public class VersionController {

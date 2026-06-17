@@ -10,5 +10,10 @@ router.get("/version", async (_req, res) => {
           version
      });
 });
+router.post("/begin-login", async (req, res) => {
+     const { username } = req.body;
+     const methods = await Auth.GetLoginMethods(username);
+     res.json(methods);
+});
 
 export default { router, path: "/auth" } satisfies Route;
