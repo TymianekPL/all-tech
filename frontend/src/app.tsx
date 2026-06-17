@@ -1,14 +1,16 @@
-import { useEffect, useState } from "preact/hooks";
+import { ErrorBoundary, lazy, LocationProvider, Route, Router } from "preact-iso";
 import "./app.css";
-import { Api } from "./api/base";
+
+const HomePage = lazy(() => import("./pages/Home"));
+const NotFoundPage = lazy(() => import("./pages/404"));
 
 export function App() {
-     const [counter, setCounter] = useState<number>(0);
-     useEffect(() => {
-          Api.Get<{ counter: number }>("counter").then(({ counter }) => setCounter(counter));
-     }, []);
-     return <>
-          <h1>Counter: {counter}</h1>
-          <button onClick={() => Api.Get<{ counter: number }>("increment").then(({ counter }) => setCounter(counter))}>Increment</button>
-     </>;
+     return <LocationProvider>
+          <ErrorBoundary>
+               <Router>
+                    <Route path="/" component={HomePage} />
+                    <Route default component={NotFoundPage} />
+               </Router>
+          </ErrorBoundary>
+     </LocationProvider>;
 }
